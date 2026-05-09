@@ -46,4 +46,9 @@ export const useWorkspaceStore = create((set, get) => ({
     }),
 
   setLoading: (isLoading) => set({ isLoading }),
+
+  clearAll: () => {
+    localStorage.removeItem('prosync_active_workspace');
+    set({ workspaces: [], activeWorkspace: null, isLoading: false });
+  },
 }));

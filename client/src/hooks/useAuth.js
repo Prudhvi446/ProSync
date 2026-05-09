@@ -1,6 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { useWorkspaceStore } from '../store/workspaceStore';
+import { useTaskStore } from '../store/taskStore';
 import { loginApi, registerApi, logoutApi, getMeApi } from '../api/authApi';
 import toast from 'react-hot-toast';
 
@@ -61,6 +63,8 @@ export const useAuth = () => {
       // Silent fail — logout locally regardless
     }
     storeLogout();
+    useWorkspaceStore.getState().clearAll();
+    useTaskStore.getState().clearTasks();
     toast.success('Logged out');
     navigate('/login');
   };

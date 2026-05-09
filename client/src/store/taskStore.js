@@ -31,4 +31,6 @@ export const useTaskStore = create((set, get) => ({
   getTasksByStatus: (status) => {
     return get().tasks.filter((t) => t.status === status);
   },
+
+  clearTasks: () => set({ tasks: [], isLoading: false, error: null }),
 }));

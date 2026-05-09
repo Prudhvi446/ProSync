@@ -24,6 +24,7 @@ export const useAuthStore = create((set, get) => ({
   logout: () => {
     localStorage.removeItem('prosync_access_token');
     localStorage.removeItem('prosync_refresh_token');
+    localStorage.removeItem('prosync_active_workspace');
     set({
       user: null,
       accessToken: null,
