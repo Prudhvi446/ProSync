@@ -24,10 +24,10 @@ export const useAnalyticsStore = create((set) => ({
     }
   },
 
-  fetchSummary: async (workspaceId) => {
+  fetchSummary: async (workspaceId, forceRefresh = false) => {
     set({ isSummaryLoading: true });
     try {
-      const result = await getAISummaryApi(workspaceId);
+      const result = await getAISummaryApi(workspaceId, forceRefresh);
       set({
         summary: result.data,
         isSummaryLoading: false,

@@ -43,7 +43,7 @@ const generateFallbackSummary = (completedTasks) => {
 };
 
 const getSummary = asyncHandler(async (req, res) => {
-  const { workspaceId } = req.body;
+  const { workspaceId, forceRefresh } = req.body;
 
   if (!workspaceId) {
     res.status(400);
@@ -56,12 +56,14 @@ const getSummary = asyncHandler(async (req, res) => {
   const today = new Date().toISOString().split('T')[0];
   const cacheKey = `ai:summary:${workspaceId}:${today}`;
 
-  const cached = await cacheGet(cacheKey);
-  if (cached) {
-    return res.status(200).json({
-      success: true,
-      data: { summary: cached.summary, cached: true },
-    });
+  if (!forceRefresh) {
+    const cached = await cacheGet(cacheKey);
+    if (cached) {
+      return res.status(200).json({
+        success: true,
+        data: { summary: cached.summary, cached: true },
+      });
+    }
   }
 
   const todayStart = new Date();
@@ -103,7 +105,7 @@ const getSummary = asyncHandler(async (req, res) => {
     summary = generateFallbackSummary(completedTasks);
   } else {
     try {
-      const model = client.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      const model = client.getGenerativeModel({ model: 'gemini-1.5-flash' });
       const result = await model.generateContent(prompt);
       const response = result.response;
       summary = response.text()?.trim() || 'Unable to generate summary.';
@@ -113,7 +115,7 @@ const getSummary = asyncHandler(async (req, res) => {
     }
   }
 
-  await cacheSet(cacheKey, { summary }, 60);
+  await cacheSet(cacheKey, { summary }, 3600); // Cache for 1 hour
 
   res.status(200).json({
     success: true,

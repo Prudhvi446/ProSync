@@ -10,7 +10,8 @@ const AISummaryPanel = () => {
 
   const handleGenerate = () => {
     if (!activeWorkspace) return;
-    fetchSummary(activeWorkspace._id);
+    const isRefresh = !!summary?.summary;
+    fetchSummary(activeWorkspace._id, isRefresh);
   };
 
   return (

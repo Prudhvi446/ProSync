@@ -6,7 +6,7 @@ export const getAnalyticsApi = async (workspaceId) => {
   return { ...response.data, cacheStatus };
 };
 
-export const getAISummaryApi = async (workspaceId) => {
-  const { data } = await axiosInstance.post('/ai/summary', { workspaceId });
+export const getAISummaryApi = async (workspaceId, forceRefresh = false) => {
+  const { data } = await axiosInstance.post('/ai/summary', { workspaceId, forceRefresh });
   return data;
 };
