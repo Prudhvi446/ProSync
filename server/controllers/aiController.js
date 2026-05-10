@@ -113,7 +113,7 @@ const getSummary = asyncHandler(async (req, res) => {
     }
   }
 
-  await cacheSet(cacheKey, { summary }, 3600);
+  await cacheSet(cacheKey, { summary }, 60);
 
   res.status(200).json({
     success: true,
