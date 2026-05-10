@@ -11,7 +11,7 @@ A full-stack MERN application for real-time team task management with AI-powered
 | Database | MongoDB Atlas |
 | Cache | Redis (Upstash) |
 | Auth | JWT (access + refresh rotation) + Google OAuth 2.0 |
-| AI | OpenAI gpt-3.5-turbo |
+| AI | Gemini Flash latest |
 
 ## Features
 
@@ -19,7 +19,7 @@ A full-stack MERN application for real-time team task management with AI-powered
 - **Multi-tenant Workspaces** with role-based access (admin/member)
 - **Kanban Board** with drag-and-drop task management
 - **Real-time Updates** via Socket.io room-based architecture
-- **AI Daily Summaries** powered by OpenAI GPT-3.5
+- **AI Daily Summaries** powered by Gemini AI Flash latest
 - **Analytics Dashboard** with Redis-cached aggregation metrics
 - **Rate Limiting** to protect auth routes from brute force
 
@@ -30,7 +30,7 @@ A full-stack MERN application for real-time team task management with AI-powered
 - MongoDB Atlas account
 - Redis instance (Upstash recommended)
 - Google Cloud OAuth credentials
-- OpenAI API key
+- Gemini AI API key
 
 ### 1. Clone and configure environment
 
@@ -43,7 +43,7 @@ Edit `.env` with your actual values:
 - `JWT_ACCESS_SECRET` / `JWT_REFRESH_SECRET` — random secure strings
 - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — from Google Cloud Console
 - `REDIS_URL` / `REDIS_TOKEN` — from Upstash dashboard
-- `OPENAI_API_KEY` — from OpenAI platform
+- `GEMINI_API_KEY` — from Google AI Studio platform
 
 ### 2. Install dependencies
 
@@ -114,5 +114,5 @@ npm run dev
 2. **Redis Cache** on analytics (60s TTL) with X-Cache HIT/MISS headers
 3. **Socket.io Rooms** — workspace-scoped events, never global
 4. **React.lazy()** code splitting on all page components
-5. **OpenAI Response Caching** (1 hour) with cached indicator
+5. **Gemini AI Response Caching** (1 hour) with cached indicator
 6. **Rate Limiting** — 5 req/15min on auth, 100 req/15min global
