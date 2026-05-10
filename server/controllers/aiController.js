@@ -105,7 +105,7 @@ const getSummary = asyncHandler(async (req, res) => {
     summary = generateFallbackSummary(completedTasks);
   } else {
     try {
-      const model = client.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = client.getGenerativeModel({ model: 'gemini-flash-latest' });
       const result = await model.generateContent(prompt);
       const response = result.response;
       summary = response.text()?.trim() || 'Unable to generate summary.';
